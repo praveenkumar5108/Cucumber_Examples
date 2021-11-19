@@ -1,14 +1,16 @@
+@LoginFeature
 Feature: Login Feature
 
   Background: Open the login page
     Given User has navigated to the login page
 
-  @Regression
+  @Regression @Sanity
   Scenario: Positive Login Scenario
     When User enters the correct username and password
     And User clicks on the logn button
     Then user should be navigated to the Home Page
 
+  @Regression
   Scenario: Positive Login with Parameters
     When User enters the correct username "abc@xyz.com" and password "Abc@1234"
     And User clicks on the logn button
@@ -31,3 +33,12 @@ Feature: Login Feature
     Examples: 
       | Username     | Password | Error                                              |
       | pink@xyz.com | Def@1233 | The email or password you have entered is invalid. |
+
+  @DataTable
+  Scenario: Positive Login with Cucumber DataTable
+    When User enters the correct credentials
+      | Field    | Value       |
+      | UserName | abc@xyz.com |
+      | Password | AbcS@123    |
+    And User clicks on the logn button
+    Then user should be navigated to the Home Page

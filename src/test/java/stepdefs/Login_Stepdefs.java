@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -79,5 +80,17 @@ public class Login_Stepdefs {
 		
 		Assert.assertEquals(error, actualMsg);
     
+    }
+    @When("^User enters the correct credentials$")
+    public void user_enters_the_correct_credentials(DataTable table) throws Throwable {
+    	String UserNameVal = table.cell(1, 1);
+    	String PasswordVal = table.cell(2, 1);
+    	
+    	WebElement UserName = driver.findElement(By.name("user_login"));
+        UserName.sendKeys(UserNameVal);
+        
+        WebElement Password = driver.findElement(By.id("password"));
+        Password.sendKeys(PasswordVal);
+    	
     }
 }
